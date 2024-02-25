@@ -1,0 +1,28 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Lista de Equipos{% endblock %}
+
+{% block content %}
+<title>Asignar Equipo</title>
+</head>
+<body>
+    <h1>Asignar Equipo</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="id_usuario">Selecciona un usuario:</label>
+        <select name="usuario" id="id_usuario">
+            {% for user in usuarios_disponibles %}
+                <option value="{{ user.id }}">{{ user.username }}</option>
+            {% endfor %}
+        </select><br><br>
+        <label for="id_equipo">Selecciona un equipo:</label>
+        <select name="equipo" id="id_equipo">
+            {% for equipo in equipos_disponibles %}
+                <option value="{{ equipo.id }}">{{ equipo.referencia }}</option>
+            {% endfor %}
+        </select><br><br>
+        <button type="submit" class="btn btn-primary"">Asignar Equipo</button>
+    </form>
+</body>
+{% endblock %}

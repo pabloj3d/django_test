@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Equipos{% endblock %}
+
+{% block content %}
+    <h1>Lista de Equipos</h1>
+
+    <ul>
+        {% for equipo in equipos %}
+            {% if equipo.id not in equipos_asignados %}
+                <li>{{ equipo.referencia }} - {{ equipo.marca }} - {{ equipo.tipo }}
+                    <a style="margin-left: 2em;" href="{% url 'asignar_equipo' equipo.id %}" class="btn btn-success">Asignar</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    <a href="{% url 'asignaciones' %}" class="btn btn-primary">Ver asignaciones</a>
+{% endblock %}

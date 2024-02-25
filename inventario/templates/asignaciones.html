@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Asignaciones de Equipos{% endblock %}
+
+{% block content %}
+<h1>Lista de equipos asignados</h1>
+<ul>
+    {% for asignacion in asignaciones %}
+    <li>
+        {{ asignacion.equipo.referencia }} - {{ asignacion.usuario.username }} - {{ asignacion.fecha_asignacion }}
+        <form action="{% url 'desvincular_equipos_asignados' asignacion.id %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Desvincular</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'equipos' %}" class="btn btn-primary">Ver Equipos</a>
+{% endblock %}
